@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     public int maxFrame = 100;
     private int currentFrame = 0;
-    private Pos2D newGrid = null;
+    private Pos2D newGrid;
 
     // Start is called before the first frame update
     void Start()
@@ -147,19 +147,20 @@ public class PlayerMovement : MonoBehaviour
     */
     private Pos2D GetNewGrid(Pos2D position, EDir d)
     {
-        Pos2D newP = new Pos2D();
+        GameObject newObject = new GameObject("NewPos2D");
+        Pos2D newP = newObject.AddComponent<Pos2D>();
         newP.x = position.x;
         newP.z = position.z;
         switch (d)
         {
             case EDir.Left:
-                newP.x -= 1; break;
+                newP.x -= 2; break;
             case EDir.Up:
-                newP.z += 1; break;
+                newP.z += 2; break;
             case EDir.Right:
-                newP.x += 1; break;
+                newP.x += 2; break;
             case EDir.Down:
-                newP.z -= 1; break;
+                newP.z -= 2; break;
         }
         return newP;
     }
