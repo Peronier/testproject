@@ -162,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
             case EDir.Down:
                 newP.z -= 2; break;
         }
+        Destroy(newObject);
         return newP;
     }
 }
