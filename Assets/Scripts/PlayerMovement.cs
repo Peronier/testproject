@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 direction = d;
+                Message.add(direction.ToString());
                 transform.rotation = DirToRotation(direction);
                 newGrid = GetNewGrid(grid, direction);
                 grid = Move(grid, newGrid, ref currentFrame);
@@ -165,4 +166,45 @@ public class PlayerMovement : MonoBehaviour
         Destroy(newObject);
         return newP;
     }
+
+    //インスペクターの値が変わったときに呼び出される
+     void OnValidate()
+    {
+        if(grid.x != ToGridX(transform.position.x) || grid.z != ToGridZ(transform.position.z))
+        {
+            transform.position = new Vector3(ToWorldX(grid.x), 0, ToWorldZ(grid.z));
+        }
+        if (direction != RotationToDir(transform.rotation))
+        {
+            transform.rotation = DirToRotation(direction);
+        }
+    }
+
+    /**
+     * 引数で与えられた回転のベクトルに対応する向きを返す
+     */
+    private EDir RotationToDir(Quaternion r)
+    {
+        float y = r.eulerAngles.y;
+        if(y < 45)
+        {
+            return EDir.Up;
+        }
+        else if(y < 135)
+        {
+            return EDir.Right;
+        }
+        else if(y < 225)
+        {
+            return EDir.Down;
+        }
+        else if(y < 315)
+        {
+            return EDir.Left;
+        }
+
+        return EDir.Up;
+    }
+
+
 }

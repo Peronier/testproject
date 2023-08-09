@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5811026457408526109}
   - component: {fileID: 4980784476501476372}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
